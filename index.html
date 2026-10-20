@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>纸上清单</title>
+<meta name="description" content="DDL 倒计时、日程、烦恼粉碎机，和一只叫 Bertholdt 的伯恩山。">
+<meta name="theme-color" content="#f3ead8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="纸上清单">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="fog" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="app">
+  <header class="top">
+    <div class="today">
+      <div class="today-main" id="todayMain">10月20日</div>
+      <div class="today-sub" id="todaySub">星期二</div>
+    </div>
+    <button class="weather-chip" id="weatherChip" type="button" aria-label="天气">
+      <span class="w-icon" id="wIcon"></span>
+      <span class="w-text" id="wText">天气</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- 要事 DDL -->
+    <section class="view" id="view-ddl" data-view="ddl">
+      <div class="brief" id="brief"></div>
+      <div class="section-head">
+        <h2>要事</h2>
+        <div class="head-actions">
+          <button class="ghost-btn" id="ddlAllCal" type="button">全部加入日历</button>
+          <button class="add-btn" id="ddlAdd" type="button" aria-label="新增要事">＋</button>
+        </div>
+      </div>
+      <div class="ddl-list" id="ddlList"></div>
+      <details class="history" id="ddlHistory">
+        <summary>已送走的要事 <span id="ddlDoneCount">0</span></summary>
+        <ul id="ddlDoneList"></ul>
+      </details>
+    </section>
+
+    <!-- 日程 -->
+    <section class="view" id="view-sched" data-view="sched" hidden>
+      <div class="section-head">
+        <h2 id="schedMonth">日程</h2>
+        <div class="head-actions">
+          <button class="ghost-btn" id="schedToday" type="button">回到今天</button>
+          <button class="add-btn" id="schedAdd" type="button" aria-label="新增日程">＋</button>
+        </div>
+      </div>
+      <div class="date-strip" id="dateStrip"></div>
+      <div class="sched-day-title" id="schedDayTitle"></div>
+      <div class="sched-list" id="schedList"></div>
+    </section>
+
+    <!-- 烦恼粉碎 -->
+    <section class="view" id="view-shred" data-view="shred" hidden>
+      <div class="section-head">
+        <h2>烦恼粉碎</h2>
+        <div class="shred-count" id="shredCount"></div>
+      </div>
+      <div class="worry-paper">
+        <label for="worryText" class="worry-label">写下来，然后把它处理掉</label>
+        <textarea id="worryText" maxlength="240" placeholder="比如：明天的汇报还没准备好……"></textarea>
+        <div class="worry-hint">这里写的字不会被保存。</div>
+      </div>
+      <div class="method-row" id="methodRow" role="radiogroup" aria-label="消除方式">
+        <button type="button" data-method="tear" role="radio"><span class="m-ico" data-ico="tear"></span>撕碎</button>
+        <button type="button" data-method="crumple" role="radio"><span class="m-ico" data-ico="crumple"></span>揉团扔掉</button>
+        <button type="button" data-method="burn" role="radio"><span class="m-ico" data-ico="burn"></span>烧掉</button>
+        <button type="button" data-method="plane" role="radio"><span class="m-ico" data-ico="plane"></span>纸飞机</button>
+        <button type="button" data-method="random" role="radio"><span class="m-ico" data-ico="random"></span>随机</button>
+      </div>
+      <button class="big-btn" id="shredGo" type="button">处理掉它</button>
+    </section>
+
+    <!-- Bertholdt -->
+    <section class="view" id="view-dog" data-view="dog" hidden>
+      <div class="section-head">
+        <h2>Bertholdt</h2>
+        <div class="dog-age" id="dogAge"></div>
+      </div>
+      <div class="yard" id="yard"></div>
+      <div class="dog-status" id="dogStatus"></div>
+      <div class="meters" id="meters"></div>
+      <div class="dog-actions">
+        <button type="button" id="actFeed"><span class="a-ico" data-ico="bowl"></span>喂饭</button>
+        <button type="button" id="actWater"><span class="a-ico" data-ico="water"></span>加水</button>
+        <button type="button" id="actPet"><span class="a-ico" data-ico="paw"></span>摸摸</button>
+        <button type="button" id="actBall"><span class="a-ico" data-ico="ball"></span>扔球</button>
+      </div>
+      <div class="meal-note" id="mealNote"></div>
+    </section>
+
+    <!-- 设置 -->
+    <section class="view" id="view-settings" data-view="settings" hidden>
+      <div class="section-head"><h2>设置</h2></div>
+      <div class="settings" id="settings"></div>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="切换页面">
+    <button type="button" data-tab="ddl" class="on"><span data-ico="tab-ddl"></span>要事</button>
+    <button type="button" data-tab="sched"><span data-ico="tab-sched"></span>日程</button>
+    <button type="button" data-tab="shred"><span data-ico="tab-shred"></span>粉碎</button>
+    <button type="button" data-tab="dog"><span data-ico="tab-dog"></span>Bertholdt</button>
+    <button type="button" data-tab="settings"><span data-ico="tab-set"></span>设置</button>
+  </nav>
+</div>
+
+<div class="sheet-wrap" id="sheetWrap" hidden>
+  <div class="sheet-back" id="sheetBack"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+</div>
+
+<div class="stage" id="stage" hidden>
+  <canvas id="stageCanvas"></canvas>
+  <div class="stage-layer" id="stageLayer"></div>
+  <div class="stage-caption" id="stageCaption"></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/store.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/weather.js"></script>
+<script src="js/ics.js"></script>
+<script src="js/destroy.js"></script>
+<script src="js/dog.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
