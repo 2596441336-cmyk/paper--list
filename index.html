@@ -13,11 +13,21 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
 <link rel="stylesheet" href="css/style.css">
+<script>
+  /* 字体在页面显示之后再加载：连不上字体服务器（比如在中国大陆访问 Google）也不会白屏，只是先用手机自带字体。 */
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      [['https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css', 'LXGW WenKai', '纸'], ['https://fonts.googleapis.com/css2?family=Young+Serif&display=swap', 'Young Serif', '12']].forEach(function (f) {
+        var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = f[0]; document.head.appendChild(l);
+        // 6 秒还没下载好就放弃，避免文字一直显示不出来
+        setTimeout(function () {
+          try { if (document.fonts && !document.fonts.check('16px "' + f[1] + '"', f[2])) l.remove(); } catch (e) {}
+        }, 6000);
+      });
+    }, 50);
+  });
+</script>
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
