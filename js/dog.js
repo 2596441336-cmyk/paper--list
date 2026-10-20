@@ -11,7 +11,7 @@
     const chub = 1 + Math.min(0.18, (o.chub || 0) / 100 * 0.18);
     const leg = (x, flip) => {
       const x2 = x + 18;
-      return '<path d="M' + x + ' 138Q' + (x - 2) + ' 172 ' + (x + 2) + ' 195L' + (x2 - 2) + ' 195Q' + (x2 + 1) + ' 172 ' + x2 + ' 138Z" fill="' + C.fur + '"/>' +
+      return '<path d="M' + x + ' 156Q' + (x - 2) + ' 176 ' + (x + 2) + ' 195L' + (x2 - 2) + ' 195Q' + (x2 + 1) + ' 176 ' + x2 + ' 156Q' + (x + 9) + ' 150 ' + x + ' 156Z" fill="' + C.fur + '"/>' +
         '<path d="M' + (x + 0.6) + ' 168Q' + (x) + ' 184 ' + (x + 2) + ' 195L' + (x2 - 2) + ' 195Q' + (x2) + ' 184 ' + (x2 - 0.6) + ' 168Q' + (x + 9) + ' 163 ' + (x + 0.6) + ' 168Z" fill="' + C.rust + '"/>' +
         '<ellipse cx="' + (x + 9) + '" cy="198" rx="12.5" ry="7" fill="' + C.white + '"/>' +
         '<path d="M' + (x + 5) + ' 199v4M' + (x + 9) + ' 199.5v4M' + (x + 13) + ' 199v4" stroke="' + C.white2 + '" stroke-width="1.2" stroke-linecap="round"/>';
@@ -29,7 +29,11 @@
         '<path d="M92 120Q100 126 108 120M90 134Q100 140 110 134" stroke="' + C.white2 + '" stroke-width="1.4" fill="none" stroke-linecap="round"/>' +
         leg(73) + leg(109) +
       '</g>' +
-      '<g class="d-head" style="--hs:' + head + '">' +
+      '<g class="d-head" style="--hs:' + head + ';--hy:' + (o.headOnly ? 0 : Math.round((1 - body) * 88)) + 'px">' +
+        '<path class="d-neck" d="M66 96C66 118 76 128 100 128C124 128 134 118 134 96Z" fill="' + C.fur + '"/>' +
+        (stage === 'puppy' ? '<path d="M90 102C89 114 84 122 75 130L125 130C116 122 111 114 110 102Z" fill="' + C.white + '"/>'
+          : stage === 'young' ? '<path d="M90 102C89 114 84 124 78 134L122 134C116 124 111 114 110 102Z" fill="' + C.white + '"/>'
+          : '<path d="M90 102C89 114 82 126 75.5 140L124.5 140C118 126 111 114 110 102Z" fill="' + C.white + '"/>') +
         '<g class="d-ear-l"><path d="M68 44C52 46 42 62 44 84C45 94 57 95 62 86C67 74 71 60 74 50Z" fill="' + C.fur2 + '"/></g>' +
         '<g class="d-ear-r"><path d="M132 44C148 46 158 62 156 84C155 94 143 95 138 86C133 74 129 60 126 50Z" fill="' + C.fur2 + '"/></g>' +
         '<path d="M100 25C129 25 147 43 147 68C147 93 128 109 100 109C72 109 53 93 53 68C53 43 71 25 100 25Z" fill="' + C.fur + '"/>' +
@@ -51,7 +55,7 @@
   }
 
   function headOnlySVG(size) {
-    return '<svg viewBox="40 20 120 95" width="' + size + '" height="' + Math.round(size * 95 / 120) + '" class="dog-svg pose-happy only-head" aria-hidden="true">' + dogParts({ stage: stageName() }).replace(/<g class="d-tail">[\s\S]*?<\/g><g class="d-bodyparts"[\s\S]*?<\/g><g class="d-head"/, '<g class="d-head"') + '</svg>';
+    return '<svg viewBox="40 20 120 95" width="' + size + '" height="' + Math.round(size * 95 / 120) + '" class="dog-svg pose-happy only-head" aria-hidden="true">' + dogParts({ stage: stageName(), headOnly: true }).replace(/<g class="d-tail">[\s\S]*?<\/g><g class="d-bodyparts"[\s\S]*?<\/g><g class="d-head"/, '<g class="d-head"') + '</svg>';
   }
 
   /* ---------- 状态 ---------- */

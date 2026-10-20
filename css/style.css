@@ -294,7 +294,7 @@ svg { display: block; }
 /* 狗狗动作 */
 .dog-svg .d-tail { transform-box: view-box; transform-origin: 132px 166px; animation: wag 1.3s ease-in-out infinite; }
 .dog-svg .d-bodyparts { transform-box: view-box; transform-origin: 100px 200px; }
-.dog-svg .d-head { transform-box: view-box; transform-origin: 100px 104px; transform: scale(var(--hs, 1)); transition: transform .35s ease; }
+.dog-svg .d-head { transform-box: view-box; transform-origin: 100px 104px; transform: translateY(var(--hy, 0px)) scale(var(--hs, 1)); transition: transform .35s ease; }
 .dog-svg .d-ear-l { transform-box: view-box; transform-origin: 70px 48px; transition: transform .35s; }
 .dog-svg .d-ear-r { transform-box: view-box; transform-origin: 130px 48px; transition: transform .35s; }
 .dog-svg .d-eyes { transform-box: view-box; transform-origin: 100px 67px; animation: blink 5.5s infinite; }
@@ -311,12 +311,12 @@ svg { display: block; }
 .dog-svg.pose-happy .d-head { animation: tilt .9s ease-in-out infinite alternate; }
 .dog-svg.pose-content .d-head { animation: tilt 3.2s ease-in-out infinite alternate; }
 .dog-svg.pose-sad .d-tail { animation: none; transform: rotate(22deg); }
-.dog-svg.pose-sad .d-head { transform: translateY(6px) rotate(-5deg) scale(var(--hs, 1)); }
+.dog-svg.pose-sad .d-head { transform: translateY(6px) rotate(-5deg) translateY(var(--hy, 0px)) scale(var(--hs, 1)); }
 .dog-svg.pose-sad .d-ear-l { transform: rotate(9deg); } .dog-svg.pose-sad .d-ear-r { transform: rotate(-9deg); }
 .dog-svg.pose-sad .d-eyes-open { transform: translateY(2.5px); }
 .dog-svg.pose-eat .d-head { animation: eat .42s ease-in-out infinite; }
 .dog-svg.pose-eat .d-eyes-open { transform: translateY(3px); }
-.dog-svg.pose-full .d-head { transform: rotate(16deg) scale(var(--hs, 1)); }
+.dog-svg.pose-full .d-head { transform: rotate(16deg) translateY(var(--hy, 0px)) scale(var(--hs, 1)); }
 .dog-svg.pose-sleep .d-tail { animation: none; }
 .dog-svg.pose-sleep .d-head { animation: breathe 3.6s ease-in-out infinite; }
 .dog-svg.pose-sleep .d-ear-l { transform: rotate(6deg); } .dog-svg.pose-sleep .d-ear-r { transform: rotate(-6deg); }
@@ -324,9 +324,9 @@ svg { display: block; }
 @keyframes wag { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(9deg); } }
 @keyframes blink { 0%, 95%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
 @keyframes hop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
-@keyframes tilt { from { transform: rotate(-5deg) scale(var(--hs, 1)); } to { transform: rotate(6deg) scale(var(--hs, 1)); } }
-@keyframes eat { 0%, 100% { transform: translateY(30px) scale(var(--hs, 1)); } 50% { transform: translateY(36px) rotate(2deg) scale(var(--hs, 1)); } }
-@keyframes breathe { 0%, 100% { transform: translateY(2px) scale(var(--hs, 1)); } 50% { transform: translateY(4px) scale(var(--hs, 1)); } }
+@keyframes tilt { from { transform: rotate(-5deg) translateY(var(--hy, 0px)) scale(var(--hs, 1)); } to { transform: rotate(6deg) translateY(var(--hy, 0px)) scale(var(--hs, 1)); } }
+@keyframes eat { 0%, 100% { transform: translateY(30px) translateY(var(--hy, 0px)) scale(var(--hs, 1)); } 50% { transform: translateY(36px) rotate(2deg) translateY(var(--hy, 0px)) scale(var(--hs, 1)); } }
+@keyframes breathe { 0%, 100% { transform: translateY(2px) translateY(var(--hy, 0px)) scale(var(--hs, 1)); } 50% { transform: translateY(4px) translateY(var(--hy, 0px)) scale(var(--hs, 1)); } }
 
 /* 底部标签栏 */
 .tabbar {

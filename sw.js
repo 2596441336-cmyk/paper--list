@@ -1,5 +1,5 @@
 /* 离线缓存：应用本身的文件先用缓存、后台更新；天气接口始终走网络。 */
-const VERSION = 'paperlist-v1';
+const VERSION = 'paperlist-v2';
 const SHELL = ['./', 'index.html', 'css/style.css', 'js/store.js', 'js/icons.js', 'js/sound.js', 'js/weather.js', 'js/ics.js', 'js/destroy.js', 'js/dog.js', 'js/app.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
